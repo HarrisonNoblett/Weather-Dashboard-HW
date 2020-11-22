@@ -1,0 +1,17 @@
+#jumbo {
+    text-align: center;
+    background-color: slategrey;
+    color: white;
+    font-family: 'Noto Sans JP', sans-serif;
+    border-radius: 25px;
+    padding: 10px;
+}
+#search {
+    font-family: 'Noto Sans JP', sans-serif;
+    float: left;
+    padding-left: 0px;
+    font-size: 10px;
+}
+#searchInput {
+    float: left;
+}
