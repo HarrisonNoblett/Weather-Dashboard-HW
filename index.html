@@ -14,92 +14,132 @@
 <body>
     <div class="jumbotron jumbotron-fluid" id="jumbo">
         <div class="container">
-          <h1 class="display-4">Weather Dashboard</h1>
+            <h1 class="display-4">Weather Dashboard</h1>
         </div>
     </div>
-
+    
     <div class="container">
         <div class="row">
-            <div class="col-md-3" id="search" id="localDiv">
-                <h4>Search for a City:</h4>
-            </div>
-        </div>
-        <div class="row">
-            
-            <div class="col-md-4">
+            <div class="col-md-3" id="search">
+                <h4>Search for a City:</h4>                                            
                 <div>
-                    <input type="text" id="searchInput"><button type="button" id="saveBtn"class="btn btn-primary"><i class="fa fa-search"></i></button>
-                    
+                    <input type="text" id="searchInput"><button type="button" id="saveBtn"class="btn btn-primary"><i class="fa fa-search"></i></button>  
+                </div>
+                <div>
+                    <p id="history">History: </p>
                 </div>
             </div>
-            <div class="col-md-8" id="contentDiv">
-
-            </div>
-        </div>
-        <div class="row">
-            <div id="fiveDay">5 Day Forcast</div>
-        </div>
-        <div class="row" >
-            <div class="col-md-2" id="futureDays">
-                
-            </div>
-            <div class="col-md-2" >
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Monday</h5>
+            <div class="col-md-9" >
+                <div class="row">
+                    <div id="contentDiv">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p id="cityName">City: </p><p id="date"></p>  
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p id="temperature">Temperature: </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p id="humidity">Humidity: </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p id="windSpeed">Wind-Speed: </p>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-            </div>
-            <div class="col-md-2" >
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Tuesday</h5>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="fiveDay">5 Day Forcast</div>
                     </div>
-                  </div>
-            </div>
-            <div class="col-md-2" >
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Wednesday</h5>
+                </div>
+                <div class="row" id="days">
+                    <div class="col-md-2" id="blueBox">
+                        <div class="card-body">
+                            <p id="date-1">Date: </p>
+                        </div>
+                        <div class="card-body">
+                            <p id="temp-1">Temp: </p>
+                        </div>
+                        <div class="card-body">
+                            <p id="humid-1">Humidity: </p>
+                        </div>
                     </div>
-                  </div>
-            </div>
-            <div class="col-md-2" >
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Thursday</h5>
+                    <div class="col-md-2" id="blueBox">
+                        <div class="card-body">
+                            <p id="date-2">Date: </p>
+                        </div>
+                        <div class="card-body">
+                            <p id="temp-2">Temp: </p>
+                        </div>
+                        <div class="card-body">
+                            <p id="humid-2">Humidity: </p>
+                        </div>
                     </div>
-                  </div>
-            </div>
-            <div class="col-md-2" >
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Friday</h5>
+                    <div class="col-md-2" id="blueBox">
+                        <div class="card-body">
+                            <p id="date-3">Date: </p>
+                        </div>
+                        <div class="card-body">
+                            <p id="temp-3">Temp: </p>
+                        </div>
+                        <div class="card-body">
+                            <p id="humid-3">Humidity: </p>
+                        </div>
                     </div>
-                  </div>
+                    <div class="col-md-2" id="blueBox">
+                        <div class="card-body">
+                            <p id="date-4">Date: </p>
+                        </div>
+                        <div class="card-body">
+                            <p id="temp-4">Temp: </p>
+                        </div>
+                        <div class="card-body">
+                            <p id="humid-4">Humidity: </p>
+                        </div>
+                    </div>
+                    <div class="col-md-2" id="blueBox">
+                        <div class="card-body">
+                            <p id="date-5">Date: </p>
+                        </div>
+                        <div class="card-body">
+                            <p id="temp-5">Temp: </p>
+                        </div>
+                        <div class="card-body">
+                            <p id="humid-5">Humidity: </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
     <script>
+        
         $(document).ready(function(){
             // search button code that gets the ajax function
+            var history = JSON.parse(localStorage.getItem('cities')) || []
+            var divEl = $("<div></div>")
+                history.forEach((city) => $('#history').append('<div></div>'))
             $("#saveBtn").on("click", function(event){
                 event.preventDefault();
                 var searchIn = $("#searchInput").val();
                 forcastCity(searchIn)
                 console.log(searchIn)
+                var savedCities = JSON.parse(localStorage.getItem('cities')) || []
+                savedCities.push(searchIn)
+                localStorage.setItem('cities', JSON.stringify(savedCities))
             })
         
             function forcastCity(city) {  
                 //api variables
                 var apiKey = "&appid=a2a614fcc58b7137fc619a120514b417"
-                var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + apiKey;
+                var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial" + apiKey
                 console.log(queryURL)
                 // execute the ajax call
                 $.ajax({
@@ -107,6 +147,19 @@
                     method: "GET"
                 }).then(function(response){
                     console.log(response)
+                    $("#cityName").text("Name: " + response.city.name)
+                    $("#date").text("Date: " + response.list[0].dt_txt.split(" ")[0])
+                    $("#temperature").text("Temp: " + response.list[0].main.temp)
+                    $("#humidity").text("Humidity: " + response.list[0].main.humidity)
+                    $("#windSpeed").text("Wind-Speed: " + response.list[0].wind.speed)
+
+                    var days = response.list.filter(day => day.dt_txt.endsWith('00:00:00'))
+                    console.log(days)
+                    days.forEach((day, index) => {
+                        $(`#date-${index + 1}`).text("Date: " + day.dt_txt.split(' ')[0])
+                        $(`#temp-${index + 1}`).text("Temp: " + day.main.temp)
+                        $(`#humid-${index + 1}`).text("Humidity: " + day.main.humidity)
+                    })
                 });
             }  
         }) 
